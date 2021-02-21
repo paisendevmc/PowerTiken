@@ -14,10 +14,10 @@ index e83e4241a56fe131a75fe21cc1518992c089da2c..752d62eb3b87ab24260ec2c029bae0d2
          <dependency>
 -            <groupId>com.tuinity</groupId>
 -            <artifactId>tuinity-api</artifactId>
-+            <!-- Purpur start - our "upstream" is Paper (not Tuinity), so this is necessary for DependencyLoading.kt to work properly -->
++            <!-- PowerTiken start - our "upstream" is Paper (not Tuinity), so this is necessary for DependencyLoading.kt to work properly -->
 +            <groupId>net.pl3x.purpur</groupId>
 +            <artifactId>purpur-api</artifactId>
-+            <!-- Purpur end -->
++            <!-- PowerTiken end -->
              <version>${project.version}</version>
              <scope>compile</scope>
          </dependency>
@@ -30,7 +30,7 @@ index 74ed02fa9296583977bb721014b10ff8b708b43c..c1280478ee4565003883df9607d4a8a0
      protected LineReader buildReader(LineReaderBuilder builder) {
          return super.buildReader(builder
 -                .appName("Paper")
-+                .appName("Purpur") // Purpur
++                .appName("PowerTiken") // PowerTiken
                  .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
          );
@@ -56,7 +56,7 @@ index 1768554b00ea0b7a57ebbed1f0bc5d8fd6f02f76..fe4ef4ea7117a6f38e4d068aae5b5ec6
  
      public String getServerModName() {
 -        return "Tuinity"; // Tuinity //Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
-+        return "Purpur"; // Purpur // Tuinity // Paper // Spigot // CraftBukkit
++        return "PowerTiken"; // PowerTiken // Tuinity // Paper // Spigot // CraftBukkit
      }
  
      public CrashReport b(CrashReport crashreport) {
@@ -96,8 +96,8 @@ index 0000000000000000000000000000000000000000..d8b408f061d96e2fa8e2e587462e2221
 +    @Nonnull
 +    @Override
 +    public String getVersionMessage(@Nonnull String serverVersion) {
-+        String[] parts = serverVersion.substring("git-Purpur-".length()).split("[-\\s]");
-+        String updateMessage = getUpdateStatusMessage("pl3xgaming/Purpur", GITHUB_BRANCH_NAME, parts[0]);
++        String[] parts = serverVersion.substring("git-PowerTiken-".length()).split("[-\\s]");
++        String updateMessage = getUpdateStatusMessage("paisendevmc/PowerTiken", GITHUB_BRANCH_NAME, parts[0]);
 +        String history = getHistory();
 +
 +        return history != null ? history + "\n" + updateMessage : updateMessage;
@@ -190,7 +190,7 @@ index 44524e08bed8897e43e408b6f179bf798fed9b62..19a209cfc71e30edd3ff2d8c319df5e8
  
  public final class CraftServer implements Server {
 -    private final String serverName = "Tuinity"; // Paper // Tuinity
-+    private final String serverName = "Purpur"; // Paper // Tuinity // Purpur
++    private final String serverName = "Purpur"; // Paper // Tuinity // PowerTiken
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");

@@ -36,11 +36,11 @@ index 673c40d952bae6ae9e92aac9742e58ffb6a8b1bb..ce14283dd1a1fddbea17c2fbaf1c4ef9
              }
          }
  
-+        // Purpur start - public save method for config migration
++        // PowerTiken start - public save method for config migration
 +        saveConfig();
 +    }
 +    public static void saveConfig() {
-+        // Purpur end
++        // PowerTiken end
          try {
              config.save(CONFIG_FILE);
          } catch (IOException ex) {
@@ -52,7 +52,7 @@ index ecff0657e5666ddc2e6a5c3111bfb2b8dd2b78d3..3ee8d31c453105eca7b96bede39a9ebb
              return false;
          }
          com.destroystokyo.paper.PaperConfig.registerCommands();
-+        // Purpur start
++        // PowerTiken start
 +        try {
 +            net.pl3x.purpur.PurpurConfig.init((java.io.File) options.valueOf("purpur-settings"));
 +        } catch (Exception e) {
@@ -60,7 +60,7 @@ index ecff0657e5666ddc2e6a5c3111bfb2b8dd2b78d3..3ee8d31c453105eca7b96bede39a9ebb
 +            return false;
 +        }
 +        net.pl3x.purpur.PurpurConfig.registerCommands();
-+        // Purpur end
++        // PowerTiken end
          com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // load version history now
          // Paper end
          com.tuinity.tuinity.config.TuinityConfig.init((java.io.File) options.valueOf("tuinity-settings")); // Tuinity - Server Config
@@ -85,7 +85,7 @@ index 970c1be5477a01ab9c6d79e84c519e22775564ff..ee1d5e2dc9fb21190a73e0f333e962a1
      public final ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
  
      public final com.tuinity.tuinity.config.TuinityConfig.WorldConfig tuinityConfig; // Tuinity - Server Config
-+    public final net.pl3x.purpur.PurpurWorldConfig purpurConfig; // Purpur
++    public final net.pl3x.purpur.PurpurWorldConfig purpurConfig; // PowerTiken
  
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
      public static BlockPosition lastPhysicsProblem; // Spigot
@@ -179,7 +179,7 @@ index 0000000000000000000000000000000000000000..cd3272520eb78a9c663bac3bfdb2b63d
 +
 +    public static void registerCommands() {
 +        for (Map.Entry<String, Command> entry : commands.entrySet()) {
-+            MinecraftServer.getServer().server.getCommandMap().register(entry.getKey(), "Purpur", entry.getValue());
++            MinecraftServer.getServer().server.getCommandMap().register(entry.getKey(), "PowerTiken", entry.getValue());
 +        }
 +    }
 +
@@ -361,7 +361,7 @@ index 0000000000000000000000000000000000000000..4904be939c7a4b1d1583fd7b6232c930
 +            }
 +            console.server.reloadCount++;
 +
-+            Command.broadcastCommandMessage(sender, ChatColor.GREEN + "Purpur config reload complete.");
++            Command.broadcastCommandMessage(sender, ChatColor.GREEN + "PowerTiken config reload complete.");
 +        } else if (args[0].equalsIgnoreCase("version")) {
 +            Command verCmd = org.bukkit.Bukkit.getServer().getCommandMap().getCommand("version");
 +            if (verCmd != null) {
@@ -380,7 +380,7 @@ index 19a209cfc71e30edd3ff2d8c319df5e8b331e6cf..8cd8db287bb4110e17ec0da57ee1547c
          org.spigotmc.SpigotConfig.init((File) console.options.valueOf("spigot-settings")); // Spigot
          com.destroystokyo.paper.PaperConfig.init((File) console.options.valueOf("paper-settings")); // Paper
          com.tuinity.tuinity.config.TuinityConfig.init((File) console.options.valueOf("tuinity-settings")); // Tuinity - Server Config
-+        net.pl3x.purpur.PurpurConfig.init((File) console.options.valueOf("purpur-settings")); // Purpur
++        net.pl3x.purpur.PurpurConfig.init((File) console.options.valueOf("purpur-settings")); // PowerTiken
          for (WorldServer world : console.getWorlds()) {
              world.worldDataServer.setDifficulty(config.difficulty);
              world.setSpawnFlags(config.spawnMonsters, config.spawnAnimals);
@@ -388,7 +388,7 @@ index 19a209cfc71e30edd3ff2d8c319df5e8b331e6cf..8cd8db287bb4110e17ec0da57ee1547c
              world.spigotConfig.init(); // Spigot
              world.paperConfig.init(); // Paper
              world.tuinityConfig.init(); // Tuinity - Server Config
-+            world.purpurConfig.init(); // Purpur
++            world.purpurConfig.init(); // PowerTiken
          }
  
          Plugin[] pluginClone = pluginManager.getPlugins().clone(); // Paper
@@ -396,7 +396,7 @@ index 19a209cfc71e30edd3ff2d8c319df5e8b331e6cf..8cd8db287bb4110e17ec0da57ee1547c
          reloadData();
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          com.destroystokyo.paper.PaperConfig.registerCommands(); // Paper
-+        net.pl3x.purpur.PurpurConfig.registerCommands(); // Purpur
++        net.pl3x.purpur.PurpurConfig.registerCommands(); // PowerTiken
          overrideAllCommandBlockCommands = commandsConfiguration.getStringList("command-block-overrides").contains("*");
          ignoreVanillaPermissions = commandsConfiguration.getBoolean("ignore-vanilla-permissions");
  
@@ -404,7 +404,7 @@ index 19a209cfc71e30edd3ff2d8c319df5e8b331e6cf..8cd8db287bb4110e17ec0da57ee1547c
          }
          // Tuinity end - add config to timings report
  
-+        // Purpur start
++        // PowerTiken start
 +        @Override
 +        public YamlConfiguration getPurpurConfig() {
 +            return net.pl3x.purpur.PurpurConfig.config;
@@ -414,7 +414,7 @@ index 19a209cfc71e30edd3ff2d8c319df5e8b331e6cf..8cd8db287bb4110e17ec0da57ee1547c
 +        public java.util.Properties getServerProperties() {
 +            return getProperties().properties;
 +        }
-+        // Purpur end
++        // PowerTiken end
 +
          @Override
          public void restart() {
@@ -427,13 +427,13 @@ index 0f6cb508a170360b6479f9c34048412453fbb89d..a92721dff5c2a9a2a167b36c23d1ef22
                          .describedAs("Yml file");
                  /* Conctete End - Server Config */
  
-+                // Purpur Start
++                // PowerTiken Start
 +                acceptsAll(asList("purpur", "purpur-settings"), "File for purpur settings")
 +                        .withRequiredArg()
 +                        .ofType(File.class)
-+                        .defaultsTo(new File("purpur.yml"))
++                        .defaultsTo(new File("powertiken.yml"))
 +                        .describedAs("Yml file");
-+                // Purpur end
++                // PowerTiken end
 +
                  // Paper start
                  acceptsAll(asList("server-name"), "Name of the server")
